@@ -1,0 +1,32 @@
+[2025-02-02T00:16:40.763+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: enrichment_pipeline.enrich_data scheduled__2025-02-01T00:00:00+00:00 [queued]>
+[2025-02-02T00:16:40.773+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: enrichment_pipeline.enrich_data scheduled__2025-02-01T00:00:00+00:00 [queued]>
+[2025-02-02T00:16:40.774+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2025-02-02T00:16:40.785+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): enrich_data> on 2025-02-01 00:00:00+00:00
+[2025-02-02T00:16:40.790+0000] {standard_task_runner.py:57} INFO - Started process 743 to run task
+[2025-02-02T00:16:40.796+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'enrichment_pipeline', 'enrich_data', 'scheduled__2025-02-01T00:00:00+00:00', '--job-id', '20', '--raw', '--subdir', 'DAGS_FOLDER/enrichment_pipeline.py', '--cfg-path', '/tmp/tmpnn3v216x']
+[2025-02-02T00:16:40.799+0000] {standard_task_runner.py:85} INFO - Job 20: Subtask enrich_data
+[2025-02-02T00:16:40.853+0000] {task_command.py:410} INFO - Running <TaskInstance: enrichment_pipeline.enrich_data scheduled__2025-02-01T00:00:00+00:00 [running]> on host 41901dcf10be
+[2025-02-02T00:16:40.943+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='enrichment_pipeline' AIRFLOW_CTX_TASK_ID='enrich_data' AIRFLOW_CTX_EXECUTION_DATE='2025-02-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-01T00:00:00+00:00'
+[2025-02-02T00:16:41.066+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/enrichment.py", line 32, in enrich_data
+    .config("spark.sql.shuffle.partitions", "8") \
+  File "/home/airflow/.local/lib/python3.7/site-packages/pyspark/sql/session.py", line 269, in getOrCreate
+    sc = SparkContext.getOrCreate(sparkConf)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pyspark/context.py", line 483, in getOrCreate
+    SparkContext(conf=conf or SparkConf())
+  File "/home/airflow/.local/lib/python3.7/site-packages/pyspark/context.py", line 195, in __init__
+    SparkContext._ensure_initialized(self, gateway=gateway, conf=conf)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pyspark/context.py", line 417, in _ensure_initialized
+    SparkContext._gateway = gateway or launch_gateway(conf)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pyspark/java_gateway.py", line 106, in launch_gateway
+    raise RuntimeError("Java gateway process exited before sending its port number")
+RuntimeError: Java gateway process exited before sending its port number
+[2025-02-02T00:16:41.074+0000] {taskinstance.py:1350} INFO - Marking task as FAILED. dag_id=enrichment_pipeline, task_id=enrich_data, execution_date=20250201T000000, start_date=20250202T001640, end_date=20250202T001641
+[2025-02-02T00:16:41.083+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 20 for task enrich_data (Java gateway process exited before sending its port number; 743)
+[2025-02-02T00:16:41.090+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2025-02-02T00:16:41.109+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

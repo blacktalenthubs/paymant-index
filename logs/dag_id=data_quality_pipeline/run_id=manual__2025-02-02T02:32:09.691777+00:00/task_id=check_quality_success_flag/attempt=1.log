@@ -1,0 +1,16 @@
+[2025-02-02T02:32:11.720+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_quality_pipeline.check_quality_success_flag manual__2025-02-02T02:32:09.691777+00:00 [queued]>
+[2025-02-02T02:32:11.726+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_quality_pipeline.check_quality_success_flag manual__2025-02-02T02:32:09.691777+00:00 [queued]>
+[2025-02-02T02:32:11.726+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2025-02-02T02:32:11.733+0000] {taskinstance.py:1327} INFO - Executing <Task(BranchPythonOperator): check_quality_success_flag> on 2025-02-02 02:32:09.691777+00:00
+[2025-02-02T02:32:11.738+0000] {standard_task_runner.py:57} INFO - Started process 1159 to run task
+[2025-02-02T02:32:11.740+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'data_quality_pipeline', 'check_quality_success_flag', 'manual__2025-02-02T02:32:09.691777+00:00', '--job-id', '69', '--raw', '--subdir', 'DAGS_FOLDER/data_quality_pipeline.py', '--cfg-path', '/tmp/tmpm2ny27m3']
+[2025-02-02T02:32:11.742+0000] {standard_task_runner.py:85} INFO - Job 69: Subtask check_quality_success_flag
+[2025-02-02T02:32:11.771+0000] {task_command.py:410} INFO - Running <TaskInstance: data_quality_pipeline.check_quality_success_flag manual__2025-02-02T02:32:09.691777+00:00 [running]> on host abe603409156
+[2025-02-02T02:32:11.822+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='data_quality_pipeline' AIRFLOW_CTX_TASK_ID='check_quality_success_flag' AIRFLOW_CTX_EXECUTION_DATE='2025-02-02T02:32:09.691777+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-02T02:32:09.691777+00:00'
+[2025-02-02T02:32:11.823+0000] {python.py:183} INFO - Done. Returned value was: validate_data
+[2025-02-02T02:32:11.824+0000] {python.py:216} INFO - Branch callable return validate_data
+[2025-02-02T02:32:11.824+0000] {skipmixin.py:164} INFO - Following branch validate_data
+[2025-02-02T02:32:11.824+0000] {skipmixin.py:224} INFO - Skipping tasks ['skip_quality']
+[2025-02-02T02:32:11.854+0000] {taskinstance.py:1350} INFO - Marking task as SUCCESS. dag_id=data_quality_pipeline, task_id=check_quality_success_flag, execution_date=20250202T023209, start_date=20250202T023211, end_date=20250202T023211
+[2025-02-02T02:32:11.873+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 0
+[2025-02-02T02:32:11.896+0000] {taskinstance.py:2653} INFO - 1 downstream tasks scheduled from follow-on schedule check

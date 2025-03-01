@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Production Data Pipeline Architecture</title>
+  <style>
+    body {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 18px;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .section h2 {
+      margin-top: 0;
+      color: #333;
+    }
+    .section ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .section li {
+      margin: 5px 0;
+    }
+    .arrow {
+      text-align: center;
+      font-size: 24px;
+      margin: 10px 0;
+    }
+    .code {
+      background: #eee;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Production Data Pipeline Architecture</h1>
+
+    <div class="section">
+      <h2>Upstream Data Sources</h2>
+      <ul>
+        <li><strong>Transactions:</strong> { transaction_id, user_id, merchant_id, location_id, card_id, amount, transaction_date }</li>
+        <li><strong>ML Signals:</strong> { ml_signal_id, transaction_id, fraud_score, created_date }</li>
+        <li><strong>Locations:</strong> { location_id, country, city }</li>
+        <li><strong>Merchants:</strong> { merchant_id, merchant_name, merchant_category }</li>
+        <li><strong>Users:</strong> { user_id, first_name, last_name, email }</li>
+        <li><strong>Cards:</strong> { card_id, masked_card_number }</li>
+      </ul>
+    </div>
+
+    <div class="arrow">▼</div>
+
+    <div class="section">
+      <h2>Data Ingestion Layer (Python/Pandas)</h2>
+      <p><strong>Purpose:</strong> Generate or ingest raw data.</p>
+      <p><strong>Schema:</strong></p>
+      <ul>
+        <li>Users: { user_id, first_name, last_name, email }</li>
+        <li>Merchants: { merchant_id, merchant_name, merchant_category }</li>
+        <li>Locations: { location_id, country, city }</li>
+        <li>Cards: { card_id, masked_card_number }</li>
+        <li>Transactions: { transaction_id, user_id, merchant_id, location_id, card_id, amount, transaction_date }</li>
+        <li>ML Signals: { ml_signal_id, transaction_id, fraud_score, created_date }</li>
+      </ul>
+      <p><strong>Key Value:</strong> Writes Parquet files to <span class="code">/data/ingestion</span> and creates a <span class="code">_SUCCESS</span> flag to prevent reprocessing stale datasets.</p>
+    </div>
+
+    <div class="arrow">▼</div>
+
+    <div class="section">
+      <h2>Data Enrichment Layer (Python/Pandas)</h2>
+      <p><strong>Purpose:</strong> Transform raw ingestion data with business rules.</p>
+      <p><strong>Schema (Enriched Transactions):</strong> { transaction_id, user_id, merchant_id, location_id, card_id, amount, transaction_date, country, city, is_allowed, norm_country }</p>
+      <p><strong>Key Value:</strong></p>
+      <ul>
+        <li>Joins raw transactions with locations to enrich data.</li>
+        <li>Normalizes country names and applies policy (e.g., restricted countries).</li>
+        <li>Partitions by <span class="code">transaction_date</span> for query efficiency.</li>
+        <li>Writes enriched data to <span class="code">/data/enriched</span> with a <span class="code">_SUCCESS</span> flag.</li>
+      </ul>
+    </div>
+
+    <div class="arrow">▼</div>
+
+    <div class="section">
+      <h2>Data Indexing Layer (Spark/Python)</h2>
+      <p><strong>Purpose:</strong> Consolidate enriched data for analytical reporting.</p>
+      <p><strong>Schema (Final Index):</strong> { transaction_id, user_id, merchant_id, card_id, amount, fraud_score, is_allowed, risk_flag, transaction_date, ... }</p>
+      <p><strong>Key Value:</strong></p>
+      <ul>
+        <li>Joins enriched transactions with dimension tables (users, merchants, cards).</li>
+        <li>Uses broadcast joins to reduce shuffling.</li>
+        <li>Computes derived metrics (e.g., <span class="code">risk_flag</span> based on amount and fraud_score).</li>
+        <li>Partitions data by <span class="code">transaction_date</span> for optimized querying.</li>
+        <li>Writes final index to <span class="code">/data/indexed</span> with a <span class="code">_SUCCESS</span> flag.</li>
+      </ul>
+    </div>
+
+    <div class="arrow">▼</div>
+
+    <div class="section">
+      <h2>Data Quality Layer (Spark/Python)</h2>
+      <p><strong>Purpose:</strong> Validate the final indexed data for consistency.</p>
+      <p><strong>Schema:</strong> Quality Report: A text file listing required column checks, numeric validations, and errors.</p>
+      <p><strong>Key Value:</strong></p>
+      <ul>
+        <li>Reads the final index and performs schema and numeric validations.</li>
+        <li>Writes a quality report and a <span class="code">_SUCCESS</span> flag to <span class="code">/data/quality</span>.</li>
+      </ul>
+    </div>
+
+    <div class="arrow">▼</div>
+
+    <div class="section">
+      <h2>Persistent Data Storage (Volumes)</h2>
+      <ul>
+        <li>Host mapping: <span class="code">./data → /opt/airflow/data</span></li>
+        <li>Stores all Parquet files and success flags.</li>
+      </ul>
+    </div>
+
+    <div class="arrow">▼</div>
+
+    <div class="section">
+      <h2>Deployment &amp; Orchestration</h2>
+      <ul>
+        <li><strong>Docker Compose:</strong> Orchestrates Airflow services (init, scheduler, webserver), Postgres for metadata, a custom Airflow image (with Java, Spark, extra dependencies), and volume mappings for DAGs, logs, plugins, source code, and data.</li>
+        <li><strong>Purpose:</strong> Ensures consistency, scalability, and reproducible production rollout.</li>
+      </ul>
+    </div>
+
+    <div class="arrow">▼</div>
+
+    <div class="section">
+      <h2>Monitoring &amp; Production Support</h2>
+      <ul>
+        <li>
+          <strong>Metrics Flow:</strong> Airflow emits metrics via StatsD (configured via environment variables). StatsD Exporter receives metrics on UDP port 8125 and converts them to Prometheus format; Prometheus scrapes the exporter on port 9102; Grafana visualizes these metrics.
+        </li>
+        <li>
+          <strong>Production Supports:</strong> Runbooks, alerts, and dashboards for proactive incident response, providing visibility into system performance and SLA adherence.
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

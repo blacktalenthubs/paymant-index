@@ -1,0 +1,24 @@
+[2025-02-02T00:11:34.700+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ingestion_pipeline.generate_ingestion_data manual__2025-02-02T00:11:32.011085+00:00 [queued]>
+[2025-02-02T00:11:34.708+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ingestion_pipeline.generate_ingestion_data manual__2025-02-02T00:11:32.011085+00:00 [queued]>
+[2025-02-02T00:11:34.708+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2025-02-02T00:11:34.718+0000] {taskinstance.py:1327} INFO - Executing <Task(SparkSubmitOperator): generate_ingestion_data> on 2025-02-02 00:11:32.011085+00:00
+[2025-02-02T00:11:34.721+0000] {standard_task_runner.py:57} INFO - Started process 213 to run task
+[2025-02-02T00:11:34.723+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'ingestion_pipeline', 'generate_ingestion_data', 'manual__2025-02-02T00:11:32.011085+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/upstreams_data_ingestion_pipeline.py', '--cfg-path', '/tmp/tmpzf0vhuvv']
+[2025-02-02T00:11:34.725+0000] {standard_task_runner.py:85} INFO - Job 16: Subtask generate_ingestion_data
+[2025-02-02T00:11:34.758+0000] {task_command.py:410} INFO - Running <TaskInstance: ingestion_pipeline.generate_ingestion_data manual__2025-02-02T00:11:32.011085+00:00 [running]> on host 41901dcf10be
+[2025-02-02T00:11:34.818+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='ingestion_pipeline' AIRFLOW_CTX_TASK_ID='generate_ingestion_data' AIRFLOW_CTX_EXECUTION_DATE='2025-02-02T00:11:32.011085+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-02T00:11:32.011085+00:00'
+[2025-02-02T00:11:34.826+0000] {base.py:73} INFO - Using connection ID 'spark_default' for task execution.
+[2025-02-02T00:11:34.827+0000] {spark_submit.py:339} INFO - Spark-Submit cmd: spark-submit --master yarn --conf spark.master=local[*] --conf spark.executor.instances=4 --conf spark.executor.memory=4g --conf spark.driver.memory=2g --conf spark.sql.shuffle.partitions=8 --conf spark.yarn.appMasterEnv.JAVA_HOME=/usr/lib/jvm/default-java --name arrow-spark --verbose --queue root.default /opt/***/dags/upstreams_data_ingestion_pipeline.py
+[2025-02-02T00:11:34.846+0000] {spark_submit.py:490} INFO - /opt/spark/bin/spark-class: line 71: /usr/lib/jvm/default-java/bin/java: No such file or directory
+[2025-02-02T00:11:34.847+0000] {spark_submit.py:490} INFO - /opt/spark/bin/spark-class: line 97: CMD: bad array subscript
+[2025-02-02T00:11:34.857+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/apache/spark/operators/spark_submit.py", line 157, in execute
+    self._hook.submit(self._application)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/apache/spark/hooks/spark_submit.py", line 422, in submit
+    f"Cannot execute: {self._mask_cmd(spark_submit_cmd)}. Error code is: {returncode}."
+airflow.exceptions.AirflowException: Cannot execute: spark-submit --master yarn --conf spark.master=local[*] --conf spark.executor.instances=4 --conf spark.executor.memory=4g --conf spark.driver.memory=2g --conf spark.sql.shuffle.partitions=8 --conf spark.yarn.appMasterEnv.JAVA_HOME=/usr/lib/jvm/default-java --name arrow-spark --verbose --queue root.default /opt/***/dags/upstreams_data_ingestion_pipeline.py. Error code is: 1.
+[2025-02-02T00:11:34.860+0000] {taskinstance.py:1350} INFO - Marking task as FAILED. dag_id=ingestion_pipeline, task_id=generate_ingestion_data, execution_date=20250202T001132, start_date=20250202T001134, end_date=20250202T001134
+[2025-02-02T00:11:34.869+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 16 for task generate_ingestion_data (Cannot execute: spark-submit --master yarn --conf spark.master=local[*] --conf spark.executor.instances=4 --conf spark.executor.memory=4g --conf spark.driver.memory=2g --conf spark.sql.shuffle.partitions=8 --conf spark.yarn.appMasterEnv.JAVA_HOME=/usr/lib/jvm/default-java --name arrow-spark --verbose --queue root.default /opt/***/dags/upstreams_data_ingestion_pipeline.py. Error code is: 1.; 213)
+[2025-02-02T00:11:34.900+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2025-02-02T00:11:34.919+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

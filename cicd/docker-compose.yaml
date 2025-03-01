@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  drone-server:
+    image: drone/drone:2
+    container_name: drone-server
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - drone-data:/data
+    environment:
+      - DRONE_SERVER_HOST=localhost:8080
+      - DRONE_SERVER_PROTO=http
+      - DRONE_GITHUB_CLIENT_ID=Ov23lijNp3rS7wK8IN8o
+      - DRONE_GITHUB_CLIENT_SECRET=759d66dfb383cc0be56b249c22801d56cc9d62d2
+      - DRONE_RPC_SECRET=$(openssl rand -hex 16)
+      - DRONE_USER_CREATE=username:blacktalenthubs,admin:true
+    restart: always
+
+  drone-runner:
+    image: drone/drone-runner-docker:1
+    container_name: drone-runner
+    depends_on:
+      - drone-server
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DRONE_RPC_PROTO=http
+      - DRONE_RPC_HOST=drone-server
+      - DRONE_RPC_SECRET=${DRONE_RPC_SECRET}
+      - DRONE_RUNNER_CAPACITY=2
+    restart: always
+
+volumes:
+  drone-data:

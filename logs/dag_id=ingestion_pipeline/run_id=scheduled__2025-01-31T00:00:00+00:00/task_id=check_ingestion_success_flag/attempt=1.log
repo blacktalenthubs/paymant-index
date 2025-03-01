@@ -1,0 +1,48 @@
+[2025-02-01T20:14:32.729+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ingestion_pipeline.check_ingestion_success_flag scheduled__2025-01-31T00:00:00+00:00 [queued]>
+[2025-02-01T20:14:32.735+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ingestion_pipeline.check_ingestion_success_flag scheduled__2025-01-31T00:00:00+00:00 [queued]>
+[2025-02-01T20:14:32.735+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2025-02-01T20:14:32.742+0000] {taskinstance.py:1327} INFO - Executing <Task(BranchPythonOperator): check_ingestion_success_flag> on 2025-01-31 00:00:00+00:00
+[2025-02-01T20:14:32.746+0000] {standard_task_runner.py:57} INFO - Started process 457 to run task
+[2025-02-01T20:14:32.748+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'ingestion_pipeline', 'check_ingestion_success_flag', 'scheduled__2025-01-31T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/upstreams_data_ingestion_pipeline.py', '--cfg-path', '/tmp/tmpk_mj0dat']
+[2025-02-01T20:14:32.750+0000] {standard_task_runner.py:85} INFO - Job 3: Subtask check_ingestion_success_flag
+[2025-02-01T20:14:32.780+0000] {task_command.py:410} INFO - Running <TaskInstance: ingestion_pipeline.check_ingestion_success_flag scheduled__2025-01-31T00:00:00+00:00 [running]> on host 8a41ec6729bc
+[2025-02-01T20:14:32.829+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='ingestion_pipeline' AIRFLOW_CTX_TASK_ID='check_ingestion_success_flag' AIRFLOW_CTX_EXECUTION_DATE='2025-01-31T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-31T00:00:00+00:00'
+[2025-02-01T20:14:32.830+0000] {python.py:183} INFO - Done. Returned value was: generate_ingestion_data
+[2025-02-01T20:14:32.831+0000] {python.py:216} INFO - Branch callable return generate_ingestion_data
+[2025-02-01T20:14:32.831+0000] {skipmixin.py:164} INFO - Following branch generate_ingestion_data
+[2025-02-01T20:14:32.831+0000] {skipmixin.py:224} INFO - Skipping tasks ['skip_ingestion']
+[2025-02-01T20:14:32.860+0000] {taskinstance.py:1350} INFO - Marking task as SUCCESS. dag_id=ingestion_pipeline, task_id=check_ingestion_success_flag, execution_date=20250131T000000, start_date=20250201T201432, end_date=20250201T201432
+[2025-02-01T20:14:32.890+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 0
+[2025-02-01T20:14:32.911+0000] {taskinstance.py:2653} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-02-01T20:54:17.826+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ingestion_pipeline.check_ingestion_success_flag scheduled__2025-01-31T00:00:00+00:00 [queued]>
+[2025-02-01T20:54:17.833+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ingestion_pipeline.check_ingestion_success_flag scheduled__2025-01-31T00:00:00+00:00 [queued]>
+[2025-02-01T20:54:17.833+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2025-02-01T20:54:17.841+0000] {taskinstance.py:1327} INFO - Executing <Task(BranchPythonOperator): check_ingestion_success_flag> on 2025-01-31 00:00:00+00:00
+[2025-02-01T20:54:17.845+0000] {standard_task_runner.py:57} INFO - Started process 345 to run task
+[2025-02-01T20:54:17.848+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'ingestion_pipeline', 'check_ingestion_success_flag', 'scheduled__2025-01-31T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/upstreams_data_ingestion_pipeline.py', '--cfg-path', '/tmp/tmpdb9799d2']
+[2025-02-01T20:54:17.850+0000] {standard_task_runner.py:85} INFO - Job 2: Subtask check_ingestion_success_flag
+[2025-02-01T20:54:17.888+0000] {task_command.py:410} INFO - Running <TaskInstance: ingestion_pipeline.check_ingestion_success_flag scheduled__2025-01-31T00:00:00+00:00 [running]> on host 33a4fec4b151
+[2025-02-01T20:54:17.949+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='ingestion_pipeline' AIRFLOW_CTX_TASK_ID='check_ingestion_success_flag' AIRFLOW_CTX_EXECUTION_DATE='2025-01-31T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-31T00:00:00+00:00'
+[2025-02-01T20:54:17.950+0000] {python.py:183} INFO - Done. Returned value was: generate_ingestion_data
+[2025-02-01T20:54:17.950+0000] {python.py:216} INFO - Branch callable return generate_ingestion_data
+[2025-02-01T20:54:17.950+0000] {skipmixin.py:164} INFO - Following branch generate_ingestion_data
+[2025-02-01T20:54:17.951+0000] {skipmixin.py:224} INFO - Skipping tasks ['skip_ingestion']
+[2025-02-01T20:54:17.978+0000] {taskinstance.py:1350} INFO - Marking task as SUCCESS. dag_id=ingestion_pipeline, task_id=check_ingestion_success_flag, execution_date=20250131T000000, start_date=20250201T205417, end_date=20250201T205417
+[2025-02-01T20:54:18.027+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 0
+[2025-02-01T20:54:18.052+0000] {taskinstance.py:2653} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-02-01T23:46:51.270+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ingestion_pipeline.check_ingestion_success_flag scheduled__2025-01-31T00:00:00+00:00 [queued]>
+[2025-02-01T23:46:51.276+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ingestion_pipeline.check_ingestion_success_flag scheduled__2025-01-31T00:00:00+00:00 [queued]>
+[2025-02-01T23:46:51.276+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2025-02-01T23:46:51.285+0000] {taskinstance.py:1327} INFO - Executing <Task(BranchPythonOperator): check_ingestion_success_flag> on 2025-01-31 00:00:00+00:00
+[2025-02-01T23:46:51.289+0000] {standard_task_runner.py:57} INFO - Started process 639 to run task
+[2025-02-01T23:46:51.292+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'ingestion_pipeline', 'check_ingestion_success_flag', 'scheduled__2025-01-31T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/upstreams_data_ingestion_pipeline.py', '--cfg-path', '/tmp/tmpha76rdqx']
+[2025-02-01T23:46:51.294+0000] {standard_task_runner.py:85} INFO - Job 3: Subtask check_ingestion_success_flag
+[2025-02-01T23:46:51.332+0000] {task_command.py:410} INFO - Running <TaskInstance: ingestion_pipeline.check_ingestion_success_flag scheduled__2025-01-31T00:00:00+00:00 [running]> on host 419fb3cffe45
+[2025-02-01T23:46:51.390+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='ingestion_pipeline' AIRFLOW_CTX_TASK_ID='check_ingestion_success_flag' AIRFLOW_CTX_EXECUTION_DATE='2025-01-31T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-31T00:00:00+00:00'
+[2025-02-01T23:46:51.391+0000] {python.py:183} INFO - Done. Returned value was: generate_ingestion_data
+[2025-02-01T23:46:51.392+0000] {python.py:216} INFO - Branch callable return generate_ingestion_data
+[2025-02-01T23:46:51.392+0000] {skipmixin.py:164} INFO - Following branch generate_ingestion_data
+[2025-02-01T23:46:51.392+0000] {skipmixin.py:224} INFO - Skipping tasks ['skip_ingestion']
+[2025-02-01T23:46:51.421+0000] {taskinstance.py:1350} INFO - Marking task as SUCCESS. dag_id=ingestion_pipeline, task_id=check_ingestion_success_flag, execution_date=20250131T000000, start_date=20250201T234651, end_date=20250201T234651
+[2025-02-01T23:46:51.475+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 0
+[2025-02-01T23:46:51.499+0000] {taskinstance.py:2653} INFO - 1 downstream tasks scheduled from follow-on schedule check

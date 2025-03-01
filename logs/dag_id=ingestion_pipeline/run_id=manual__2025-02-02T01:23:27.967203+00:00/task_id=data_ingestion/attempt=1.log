@@ -1,0 +1,24 @@
+[2025-02-02T01:23:29.684+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ingestion_pipeline.data_ingestion manual__2025-02-02T01:23:27.967203+00:00 [queued]>
+[2025-02-02T01:23:29.691+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ingestion_pipeline.data_ingestion manual__2025-02-02T01:23:27.967203+00:00 [queued]>
+[2025-02-02T01:23:29.691+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2025-02-02T01:23:29.703+0000] {taskinstance.py:1327} INFO - Executing <Task(SparkSubmitOperator): data_ingestion> on 2025-02-02 01:23:27.967203+00:00
+[2025-02-02T01:23:29.708+0000] {standard_task_runner.py:57} INFO - Started process 2376 to run task
+[2025-02-02T01:23:29.710+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'ingestion_pipeline', 'data_ingestion', 'manual__2025-02-02T01:23:27.967203+00:00', '--job-id', '38', '--raw', '--subdir', 'DAGS_FOLDER/upstreams_data_ingestion_pipeline.py', '--cfg-path', '/tmp/tmpfhjnq97y']
+[2025-02-02T01:23:29.713+0000] {standard_task_runner.py:85} INFO - Job 38: Subtask data_ingestion
+[2025-02-02T01:23:29.757+0000] {task_command.py:410} INFO - Running <TaskInstance: ingestion_pipeline.data_ingestion manual__2025-02-02T01:23:27.967203+00:00 [running]> on host 5bf3ecbe28c2
+[2025-02-02T01:23:29.814+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='ingestion_pipeline' AIRFLOW_CTX_TASK_ID='data_ingestion' AIRFLOW_CTX_EXECUTION_DATE='2025-02-02T01:23:27.967203+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-02T01:23:27.967203+00:00'
+[2025-02-02T01:23:29.821+0000] {base.py:73} INFO - Using connection ID 'spark_local' for task execution.
+[2025-02-02T01:23:29.822+0000] {spark_submit.py:339} INFO - Spark-Submit cmd: spark-submit --master local --conf spark.master=local[*] --conf spark.executor.instances=4 --conf spark.executor.memory=4g --conf spark.driver.memory=2g --conf spark.sql.shuffle.partitions=8 --name arrow-spark --verbose /opt/***/dags/upstreams_data_ingestion_pipeline.py
+[2025-02-02T01:23:29.860+0000] {spark_submit.py:490} INFO - /opt/spark/bin/spark-class: line 71: /usr/lib/jvm/java-11-openjdk-amd64/bin/java: No such file or directory
+[2025-02-02T01:23:29.861+0000] {spark_submit.py:490} INFO - /opt/spark/bin/spark-class: line 97: CMD: bad array subscript
+[2025-02-02T01:23:29.874+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/apache/spark/operators/spark_submit.py", line 157, in execute
+    self._hook.submit(self._application)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/apache/spark/hooks/spark_submit.py", line 422, in submit
+    f"Cannot execute: {self._mask_cmd(spark_submit_cmd)}. Error code is: {returncode}."
+airflow.exceptions.AirflowException: Cannot execute: spark-submit --master local --conf spark.master=local[*] --conf spark.executor.instances=4 --conf spark.executor.memory=4g --conf spark.driver.memory=2g --conf spark.sql.shuffle.partitions=8 --name arrow-spark --verbose /opt/***/dags/upstreams_data_ingestion_pipeline.py. Error code is: 1.
+[2025-02-02T01:23:29.878+0000] {taskinstance.py:1350} INFO - Marking task as FAILED. dag_id=ingestion_pipeline, task_id=data_ingestion, execution_date=20250202T012327, start_date=20250202T012329, end_date=20250202T012329
+[2025-02-02T01:23:29.893+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 38 for task data_ingestion (Cannot execute: spark-submit --master local --conf spark.master=local[*] --conf spark.executor.instances=4 --conf spark.executor.memory=4g --conf spark.driver.memory=2g --conf spark.sql.shuffle.partitions=8 --name arrow-spark --verbose /opt/***/dags/upstreams_data_ingestion_pipeline.py. Error code is: 1.; 2376)
+[2025-02-02T01:23:29.931+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2025-02-02T01:23:29.949+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

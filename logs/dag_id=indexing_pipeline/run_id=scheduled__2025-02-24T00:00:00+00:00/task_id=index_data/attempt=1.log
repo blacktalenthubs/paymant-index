@@ -1,0 +1,32 @@
+[2025-02-25T00:00:03.307+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: indexing_pipeline.index_data scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T00:00:03.313+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: indexing_pipeline.index_data scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T00:00:03.313+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2025-02-25T00:00:03.321+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): index_data> on 2025-02-24 00:00:00+00:00
+[2025-02-25T00:00:03.325+0000] {standard_task_runner.py:57} INFO - Started process 42915 to run task
+[2025-02-25T00:00:03.328+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'indexing_pipeline', 'index_data', 'scheduled__2025-02-24T00:00:00+00:00', '--job-id', '149', '--raw', '--subdir', 'DAGS_FOLDER/indexing_pipeline.py', '--cfg-path', '/tmp/tmpmbyvyjol']
+[2025-02-25T00:00:03.329+0000] {standard_task_runner.py:85} INFO - Job 149: Subtask index_data
+[2025-02-25T00:00:03.361+0000] {task_command.py:410} INFO - Running <TaskInstance: indexing_pipeline.index_data scheduled__2025-02-24T00:00:00+00:00 [running]> on host 29612c003465
+[2025-02-25T00:00:03.410+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='indexing_pipeline' AIRFLOW_CTX_TASK_ID='index_data' AIRFLOW_CTX_EXECUTION_DATE='2025-02-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-24T00:00:00+00:00'
+[2025-02-25T00:00:03.528+0000] {taskinstance.py:1824} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 181, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 198, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/indexing.py", line 38, in index_data
+    .config("spark.sql.shuffle.partitions", "8") \
+  File "/home/airflow/.local/lib/python3.7/site-packages/pyspark/sql/session.py", line 269, in getOrCreate
+    sc = SparkContext.getOrCreate(sparkConf)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pyspark/context.py", line 483, in getOrCreate
+    SparkContext(conf=conf or SparkConf())
+  File "/home/airflow/.local/lib/python3.7/site-packages/pyspark/context.py", line 195, in __init__
+    SparkContext._ensure_initialized(self, gateway=gateway, conf=conf)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pyspark/context.py", line 417, in _ensure_initialized
+    SparkContext._gateway = gateway or launch_gateway(conf)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pyspark/java_gateway.py", line 106, in launch_gateway
+    raise RuntimeError("Java gateway process exited before sending its port number")
+RuntimeError: Java gateway process exited before sending its port number
+[2025-02-25T00:00:03.539+0000] {taskinstance.py:1350} INFO - Marking task as FAILED. dag_id=indexing_pipeline, task_id=index_data, execution_date=20250224T000000, start_date=20250225T000003, end_date=20250225T000003
+[2025-02-25T00:00:03.569+0000] {standard_task_runner.py:109} ERROR - Failed to execute job 149 for task index_data (Java gateway process exited before sending its port number; 42915)
+[2025-02-25T00:00:03.601+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 1
+[2025-02-25T00:00:03.619+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

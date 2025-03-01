@@ -1,0 +1,195 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+  margin: 20px;
+}
+h1, h2, h3, h4 {
+  font-weight: bold;
+  color: #222;
+  margin: 1rem 0 0.5rem;
+}
+h1 {
+  font-size: 2.5em;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.3em;
+}
+h2 {
+  font-size: 2em;
+}
+h3 {
+  font-size: 1.75em;
+}
+p {
+  font-size: 1em;
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+ul, ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+li {
+  margin: 0.5rem 0;
+}
+
+/* Problem block styling */
+.problem {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.problem h3 {
+  margin-top: 0;
+}
+
+/* Code styling */
+code {
+  font-family: Consolas, monospace;
+  background-color: #434c5e !important;
+  color: #d8dee9 !important;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 0.95em;
+}
+pre {
+  background-color: #3b4252 !important;
+  color: #d8dee9 !important;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: "Fira Code", Consolas, monospace;
+  font-size: 0.95em;
+  line-height: 1.4;
+  margin: 1rem 0;
+}
+
+/* HTML file content styling */
+.html-content {
+  font-size: 1em;
+  line-height: 1.6;
+  padding: 1.5rem 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  margin: 1.5rem auto;
+}
+.html-content ul {
+  list-style: disc;
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+.html-content ol {
+  list-style: decimal;
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+.html-content li {
+  margin: 0.5rem 0;
+}
+.html-content h2 {
+  font-size: 1.8em;
+  margin: 1rem 0 0.75rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+}
+.html-content p {
+  margin-bottom: 1.25rem;
+  text-align: justify;
+}
+/* Force lighter dark background for code blocks inside .html-content */
+.html-content pre {
+  background-color: #3b4252 !important;
+  color: #d8dee9 !important;
+  font-size: 0.95em;
+  padding: 1rem;
+  border-left: 4px solid #5e81ac;
+  border-radius: 6px;
+  overflow: auto;
+  font-family: "Fira Code", monospace;
+  line-height: 1.4;
+  margin: 1.5rem 0;
+}
+.html-content code {
+  background-color: #434c5e !important;
+  color: #d8dee9 !important;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: "Fira Code", monospace;
+  font-size: 0.9em;
+}
+
+/* Style tables with slightly lighter dark backgrounds within .html-content */
+.html-content table {
+  background-color: #3b4252 !important;
+  color: #d8dee9 !important;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+.html-content table th,
+.html-content table td {
+  border: 1px solid #5e81ac;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.html-content table th {
+  background-color: #4c566a !important;
+  font-weight: bold;
+}
+
+/* Locked content styling */
+.locked-content {
+  background: #fff4e5;
+  border: 1px solid #f7cd94;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  color: #70451c;
+  max-width: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.locked-content p {
+  font-size: 1em;
+  margin-bottom: 1.5rem;
+}
+.locked-content .upgrade-btn {
+  background: #ff9800;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.locked-content .upgrade-btn:hover {
+  background: #e68a00;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    margin: 10px;
+  }
+  .html-content, .md-container {
+    padding: 1.5rem;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.75em;
+  }
+  h3 {
+    font-size: 1.5em;
+  }
+  p, li {
+    font-size: 1em;
+  }
+}

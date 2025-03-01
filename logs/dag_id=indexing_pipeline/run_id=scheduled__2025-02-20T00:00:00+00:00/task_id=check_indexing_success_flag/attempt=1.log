@@ -1,0 +1,16 @@
+[2025-02-21T00:00:01.932+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: indexing_pipeline.check_indexing_success_flag scheduled__2025-02-20T00:00:00+00:00 [queued]>
+[2025-02-21T00:00:01.939+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: indexing_pipeline.check_indexing_success_flag scheduled__2025-02-20T00:00:00+00:00 [queued]>
+[2025-02-21T00:00:01.939+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2025-02-21T00:00:01.950+0000] {taskinstance.py:1327} INFO - Executing <Task(BranchPythonOperator): check_indexing_success_flag> on 2025-02-20 00:00:00+00:00
+[2025-02-21T00:00:01.956+0000] {standard_task_runner.py:57} INFO - Started process 16535 to run task
+[2025-02-21T00:00:01.962+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'indexing_pipeline', 'check_indexing_success_flag', 'scheduled__2025-02-20T00:00:00+00:00', '--job-id', '121', '--raw', '--subdir', 'DAGS_FOLDER/indexing_pipeline.py', '--cfg-path', '/tmp/tmpxaeu1bnc']
+[2025-02-21T00:00:01.966+0000] {standard_task_runner.py:85} INFO - Job 121: Subtask check_indexing_success_flag
+[2025-02-21T00:00:02.037+0000] {task_command.py:410} INFO - Running <TaskInstance: indexing_pipeline.check_indexing_success_flag scheduled__2025-02-20T00:00:00+00:00 [running]> on host 29612c003465
+[2025-02-21T00:00:02.100+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='indexing_pipeline' AIRFLOW_CTX_TASK_ID='check_indexing_success_flag' AIRFLOW_CTX_EXECUTION_DATE='2025-02-20T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-20T00:00:00+00:00'
+[2025-02-21T00:00:02.102+0000] {python.py:183} INFO - Done. Returned value was: index_data
+[2025-02-21T00:00:02.102+0000] {python.py:216} INFO - Branch callable return index_data
+[2025-02-21T00:00:02.103+0000] {skipmixin.py:164} INFO - Following branch index_data
+[2025-02-21T00:00:02.103+0000] {skipmixin.py:224} INFO - Skipping tasks ['skip_indexing']
+[2025-02-21T00:00:02.135+0000] {taskinstance.py:1350} INFO - Marking task as SUCCESS. dag_id=indexing_pipeline, task_id=check_indexing_success_flag, execution_date=20250220T000000, start_date=20250221T000001, end_date=20250221T000002
+[2025-02-21T00:00:02.174+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 0
+[2025-02-21T00:00:02.199+0000] {taskinstance.py:2653} INFO - 1 downstream tasks scheduled from follow-on schedule check

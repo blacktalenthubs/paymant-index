@@ -1,0 +1,14 @@
+[2025-03-01T16:14:59.944+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: enrichment_pipeline.data_enrichment manual__2025-03-01T16:14:58.245131+00:00 [queued]>
+[2025-03-01T16:14:59.963+0000] {taskinstance.py:1103} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: enrichment_pipeline.data_enrichment manual__2025-03-01T16:14:58.245131+00:00 [queued]>
+[2025-03-01T16:14:59.964+0000] {taskinstance.py:1308} INFO - Starting attempt 1 of 1
+[2025-03-01T16:14:59.975+0000] {taskinstance.py:1327} INFO - Executing <Task(PythonOperator): data_enrichment> on 2025-03-01 16:14:58.245131+00:00
+[2025-03-01T16:14:59.982+0000] {standard_task_runner.py:57} INFO - Started process 1954 to run task
+[2025-03-01T16:14:59.986+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'enrichment_pipeline', 'data_enrichment', 'manual__2025-03-01T16:14:58.245131+00:00', '--job-id', '188', '--raw', '--subdir', 'DAGS_FOLDER/enrichment_pipeline.py', '--cfg-path', '/tmp/tmpoffkxjb_']
+[2025-03-01T16:14:59.989+0000] {standard_task_runner.py:85} INFO - Job 188: Subtask data_enrichment
+[2025-03-01T16:15:00.070+0000] {task_command.py:410} INFO - Running <TaskInstance: enrichment_pipeline.data_enrichment manual__2025-03-01T16:14:58.245131+00:00 [running]> on host f8650cbaf99d
+[2025-03-01T16:15:00.143+0000] {taskinstance.py:1547} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='enrichment_pipeline' AIRFLOW_CTX_TASK_ID='data_enrichment' AIRFLOW_CTX_EXECUTION_DATE='2025-03-01T16:14:58.245131+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-03-01T16:14:58.245131+00:00'
+[2025-03-01T16:15:00.146+0000] {logging_mixin.py:150} INFO - Required ingestion files are missing. Exiting enrichment.
+[2025-03-01T16:15:00.147+0000] {python.py:183} INFO - Done. Returned value was: None
+[2025-03-01T16:15:00.157+0000] {taskinstance.py:1350} INFO - Marking task as SUCCESS. dag_id=enrichment_pipeline, task_id=data_enrichment, execution_date=20250301T161458, start_date=20250301T161459, end_date=20250301T161500
+[2025-03-01T16:15:00.202+0000] {local_task_job_runner.py:225} INFO - Task exited with return code 0
+[2025-03-01T16:15:00.218+0000] {taskinstance.py:2653} INFO - 0 downstream tasks scheduled from follow-on schedule check

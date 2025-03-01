@@ -1,0 +1,59 @@
+kind: pipeline
+type: docker
+name: emr-pipeline
+
+steps:
+  - name: upload-scripts
+    image: amazon/aws-cli:2.13.32
+    environment:
+      AWS_ACCESS_KEY_ID:
+        from_secret: aws_access_key_id
+      AWS_SECRET_ACCESS_KEY:
+        from_secret: aws_secret_access_key
+      AWS_REGION:
+        from_secret: aws_region
+    commands:
+      - aws s3 cp ingestions.py s3://${SCRIPTS_BUCKET}/${S3_SCRIPTS_PREFIX}/ingestions.py --region ${AWS_REGION}
+      - aws s3 cp enrichment.py s3://${SCRIPTS_BUCKET}/${S3_SCRIPTS_PREFIX}/enrichment.py --region ${AWS_REGION}
+      - aws s3 cp requirements.txt s3://${SCRIPTS_BUCKET}/${S3_SCRIPTS_PREFIX}/requirements.txt --region ${AWS_REGION}
+
+  - name: trigger-emr-step
+    image: amazon/aws-cli:2.13.32
+    environment:
+      CLUSTER_ID:
+        from_secret: emr_cluster_id
+      SCRIPTS_BUCKET:
+        from_secret: scripts_bucket
+      S3_SCRIPTS_PREFIX:
+        from_secret: s3_scripts_prefix
+    commands:
+      - |
+        STEP_ID=$(aws emr add-steps \
+          --cluster-id "${CLUSTER_ID}" \
+          --steps "[
+            {
+              \\\"Name\\\": \\\"Run Enrichment Job\\\",
+              \\\"ActionOnFailure\\\": \\\"CONTINUE\\\",
+              \\\"Type\\\": \\\"CUSTOM_JAR\\\",
+              \\\"Jar\\\": \\\"command-runner.jar\\\",
+              \\\"Args\\\": [
+                \\\"spark-submit\\\",
+                \\\"--master\\\", \\\"yarn\\\",
+                \\\"--deploy-mode\\\", \\\"cluster\\\",
+                \\\"s3://${SCRIPTS_BUCKET}/${S3_SCRIPTS_PREFIX}/enrichment.py\\\"
+              ]
+            }
+          ]" \
+          --query 'StepIds[0]' \
+          --output text \
+          --region ${AWS_REGION})
+        echo "Step ID: ${STEP_ID}"
+
+trigger:
+  branch:
+    - main
+  event:
+    - push
+  path:
+    - "scripts/**"
+    - "requirements.txt"
